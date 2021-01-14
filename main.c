@@ -135,24 +135,23 @@ void output4(int num) {
 }
 
 void output5(int num) {
-    char s;
+    char s[20];
     printf("请输入姓名:");
-    scanf("%c", &s);
+    scanf("%s", s);
     for (int i = 0; i < num; i++) {
-        if (strcmp(student[i].name, &s) == 0) {
+        if (strcmp(student[i].name, s) == 0) {
             printf("姓名:%s, 学号:%d, 数学:%d, 英语:%d, C语言:%d, 总成绩:%d\n", student[i].name, student[i].id,
                    student[i].math, student[i].eng, student[i].C, student[i].sum);
             break;
         }
     }
-    printf("测试行");
 }
 
 void output6(int num) {
     int i, j;
     for (i = 0; i < num; i++) { // 按总分递减排序
         for (j = i + 1; j < num; j++) {
-            if (student[i].sum > student[j].sum) {
+            if (student[j].sum > student[i].sum) {
                 n = student[i];
                 student[i] = student[j];
                 student[j] = n;
@@ -160,8 +159,8 @@ void output6(int num) {
         }
     }
     for (int k = 0; k < num; k++) {
-        printf("姓名:%s, 学号:%d, 数学:%d, 英语:%d, C语言:%d, 总成绩:%d\n", student[i].name, student[i].id,
-               student[i].math, student[i].eng, student[i].C, student[i].sum);
+        printf("姓名:%s, 学号:%d, 数学:%d, 英语:%d, C语言:%d, 总成绩:%d\n", student[k].name, student[k].id,
+               student[k].math, student[k].eng, student[k].C, student[k].sum);
     }
 }
 
@@ -182,11 +181,11 @@ void output7(int num) {
 }
 
 void output8(int num) {
-    char title;
-    printf("请输入姓名:\n");
-    scanf("%c", &title);
+    char title[20];
+    printf("请输入姓名:");
+    scanf("%s", title);
     for (int i = 0; i < num; i++) {
-        if (strcmp(student[i].name, &title) == 0) {
+        if (strcmp(student[i].name, title) == 0) {
             printf("请输入新的信息:\n");
             scanf("%s %d %d %d %d", student[i].name, &student[i].id, &student[i].math, &student[i].eng,
                   &student[i].C);
@@ -195,7 +194,6 @@ void output8(int num) {
             break;
         }
     }
-    printf("测试行");
 }
 
 void output9(int num) {
@@ -204,7 +202,7 @@ void output9(int num) {
     scanf("%d", &ID2);
     for (int i = 0; i < num; i++) {
         if (student[i].id == ID2) {
-
+            
         }
     }
 }
