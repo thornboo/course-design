@@ -87,31 +87,28 @@ void menu() {
 
 // 打开文件保存信息函数
 void save_date() {
-    char value;
+    char value[5];
     printf("是否将信息到文件中:\n");
-    printf("【Y】\n");
-    printf("【N】\n");
-    scanf("%c", &value);
-    if (value == 'Y') {
+    printf("【Y】 / 【N】\n");
+    printf("-->");
+    scanf("%s", value);
+    if (strcmp(value, "Y") == 0) {
         Node *p = firstHead;
         FILE *fp = NULL;
         fp = fopen(".\\date.txt", "r+");
-        if ((fp = fopen(".\\date.txt", "r+")) == NULL) {
-            printf("数据保存失败!\n");
-            system("pause");
-            return;
-        }
         while (p != NULL) {
             fprintf(fp, "%d %s %d %d %d %d\n", p->stu.id, p->stu.name, p->stu.math, p->stu.eng, p->stu.C,
                     p->stu.sum);
             p = p->next;
         }
-        printf("数据保存成功!");
+        printf("数据保存成功!\n");
         fclose(fp);
         system("pause");
         return;
     }
-    if (value == 'N') {
+    if (strcmp(value, "N") == 0) {
+        printf("请注意,数据未保存,请先保存后操作,避免丢失数据!\n");
+        system("pause");
         return;
     }
 }
@@ -156,16 +153,15 @@ void InputStudentInfo() {
         }
     }
     save_date();
-    system("pause");
 }
 
 // 查看学生信息函数
 void ViewStudentInfo() {
     //遍历链表
+    printf("学号\t姓名\t数学\t英语\tC语言\t总成绩\n");
     Node *p = firstHead;
     while (p != NULL) {
-        printf("%d %s %d %d %d %d\n", p->stu.id, p->stu.name, p->stu.math, p->stu.eng, p->stu.C, p->stu.sum);
-        p = p->next;
+        printf("%d\t%s\t%d\t%d\t%d\t%d\n", p->stu.id, p->stu.name, p->stu.math, p->stu.eng, p->stu.C, p->stu.sum);
         p = p->next;
     }
     if (firstHead == NULL) {
