@@ -3,8 +3,10 @@
 #include<stdlib.h>
 #include<string.h>
 
+int stu_count = 0;
+
 //学生结构体
-typedef struct _Student {
+typedef struct Student {
     int id; // 学号
     char name[20];   // 姓名
     int math; // 数学成绩
@@ -13,34 +15,29 @@ typedef struct _Student {
     int sum;  // 总成绩
 } Student;
 
-//创建链表
-typedef struct _Node {
-    Student stu;        // 学生信息
-    struct _Node *next; // 下一个节点指针
+//创建空链表
+typedef struct Node {
+    Student stu;    // 学生信息
+    struct Node *next; // 下一个节点指针,(定义结构体指针变量)
 } Node;
 
 //头结点
-Node *g_pHead = NULL;
-
+Node *firstHead = NULL;
 
 //文件
-FILE *fp;
-char filename[120];
+void openfile();
 
 // 欢迎界面
 void menu();
 
 //创建头结点
-void CreatListOfHead();
+void CreatHead();
 
 //录入学生信息
 void InputStudentInfo();
 
 //查看学生信息
 void ViewStudentInfo();
-
-//增加学生信息
-void AddStudentInfo();
 
 //总成绩排序
 void GradesRanking();
@@ -60,11 +57,10 @@ void DeleteStudentInfo_id();
 //删除学生信息(name)
 void DeleteStudentInfo_name();
 
-//循环体
+//永久循环体
 int Loop();
 
 int main() {
-    menu();
     Loop();
 
     return 0;
@@ -81,95 +77,253 @@ void menu() {
     printf("    *******************************************\n");
     printf("    *          [1] 录入学生信息                 *\n");
     printf("    *          [2] 查看学生信息                 *\n");
-    printf("    *          [3] 增加学生信息                 *\n");
-    printf("    *          [4] 按总成绩排序                 *\n");
-    printf("    *          [5] 搜索学生信息                 *\n");
-    printf("    *          [6] 修改学生信息                 *\n");
-    printf("    *          [7] 删除学生信息                 *\n");
+    printf("    *          [3] 按总成绩排序                 *\n");
+    printf("    *          [4] 搜索学生信息                 *\n");
+    printf("    *          [5] 修改学生信息                 *\n");
+    printf("    *          [6] 删除学生信息                 *\n");
     printf("    *          [0] 退出系统                    *\n");
     printf("    *******************************************\n");
 }
 
-//创建头结点
-void CreatListOfHead() {
-    Node *g_pHead = (Node *) malloc(sizeof(Node));
-    g_pHead->next = NULL;
+// 打开文件保存信息函数
+void save_date() {
+    char value;
+    printf("是否将信息到文件中:\n");
+    printf("【Y】\n");
+    printf("【N】\n");
+    scanf("%c", &value);
+    if (value == 'Y') {
+        Node *p = firstHead;
+        FILE *fp = NULL;
+        fp = fopen(".\\date.txt", "r+");
+        if ((fp = fopen(".\\date.txt", "r+")) == NULL) {
+            printf("数据保存失败!\n");
+            system("pause");
+            return;
+        }
+        while (p != NULL) {
+            fprintf(fp, "%d %s %d %d %d %d\n", p->stu.id, p->stu.name, p->stu.math, p->stu.eng, p->stu.C,
+                    p->stu.sum);
+            p = p->next;
+        }
+        printf("数据保存成功!");
+        fclose(fp);
+        system("pause");
+        return;
+    }
+    if (value == 'N') {
+        return;
+    }
 }
 
+//创建头结点
+void CreatHead() {
+    Node *firstHead = (Node *) malloc(sizeof(Node));
+    firstHead->next = NULL;
+}
+
+// 录入学生信息函数
 void InputStudentInfo() {
+    int val;
+    char value;
     //申请内存，开辟节点
     Node *p = (Node *) malloc(sizeof(Node));
     p->next = NULL;
-    printf("请输入学生信息:\n");
-    printf("学号:");
-    scanf("%d", &p->stu.id);
-    printf("姓名:");
-    scanf("%s", p->stu.name);
-    printf("数学成绩:");
-    scanf("%d", &p->stu.math);
-    printf("英语成绩:");
-    scanf("%d", &p->stu.eng);
-    printf("C语言成绩:");
-    scanf("%d", &p->stu.C);
-    p->stu.sum = p->stu.math + p->stu.eng + p->stu.C;
+    printf("请输入要录入的学生个数:");
+    scanf("%d", &val);
+    for (int i = 0; i < val; i++) {
+        printf("请输入第%d学生信息:\n", i + 1);
+        printf("-->学号:");
+        scanf("%d", &p->stu.id);
+        printf("-->姓名:");
+        scanf("%s", p->stu.name);
+        printf("-->数学成绩:");
+        scanf("%d", &p->stu.math);
+        printf("-->英语成绩:");
+        scanf("%d", &p->stu.eng);
+        printf("-->C语言成绩:");
+        scanf("%d", &p->stu.C);
+        p->stu.sum = p->stu.math + p->stu.eng + p->stu.C;
+        stu_count++;
 
-    //将节点添加到链表中
-    if (g_pHead == NULL) {
-        g_pHead = p;
-    } else {
-        //头插法
-        p->next = g_pHead;
-        g_pHead = p;
+        //将节点添加到链表中
+        if (firstHead == NULL) {
+            firstHead = p;
+        } else {
+            //头插法
+            p->next = firstHead;
+            firstHead = p;
+        }
     }
-    printf("信息录入成功！\n");
+    save_date();
+    system("pause");
 }
 
+// 查看学生信息函数
 void ViewStudentInfo() {
-
     //遍历链表
-    Node *p = g_pHead;
+    Node *p = firstHead;
     while (p != NULL) {
-        printf("%d %s %d %d %d %d\n", p->stu.id, p->stu.name, p->stu.math, p->stu.eng,
-               p->stu.C, p->stu.sum);
+        printf("%d %s %d %d %d %d\n", p->stu.id, p->stu.name, p->stu.math, p->stu.eng, p->stu.C, p->stu.sum);
+        p = p->next;
         p = p->next;
     }
-    if (g_pHead == NULL) {
-        printf("|没有存储学生信息!\n");
+    if (firstHead == NULL) {
+        printf("没有存储任何学生信息!\n");
+    }
+    system("pause");
+}
+
+// 按总成绩从高到低排名函数
+void GradesRanking() {
+    int val;
+    Node *p = firstHead;
+    while (p != NULL) {
+        if (p->stu.sum < p->next->stu.sum) {
+            val = p->stu.sum;
+            p->stu.sum = p->next->stu.sum;
+            p->next->stu.sum = val;
+        }
+        p = p->next;
+    }
+    printf("*****【总成绩排名】*****\n");
+    while (p != NULL) {
+        printf("%d %s %d %d %d %d\n", p->stu.id, p->stu.name, p->stu.math, p->stu.eng, p->stu.C, p->stu.sum);
+        p = p->next;
+    }
+    system("pause");
+}
+
+// 按学号搜索学生信息函数
+void SearchStudentInfo_id() {
+    Node *p = firstHead;
+    int id, val = 0;
+    printf("请输入要搜索的学生学号:");
+    scanf("%d", &id);
+    while (p->next != NULL) {
+        if (p->stu.id == id) {
+            printf("%d %s %d %d %d %d\n", p->stu.id, p->stu.name, p->stu.math, p->stu.eng, p->stu.C,
+                   p->stu.sum);
+            p = p->next;
+        } else {
+            printf("未查询到该生有关信息!\n");
+            system("pause");
+            return;
+        }
     }
 }
 
-void AddStudentInfo() {
-
-}
-
-void GradesRanking() {
-
-}
-
-void SearchStudentInfo_id() {
-
-}
-
+// 按姓名搜索学生信息函数
 void SearchStudentInfo_name() {
-
+    Node *p = firstHead;
+    char name[20];
+    printf("请输入要搜索的学生姓名:");
+    scanf("%s", name);
+    while (p && (strcmp(p->stu.name, name) != 0)) {
+        p = p->next;
+    }
+    if (p) {
+        printf("%d %s %d %d %d %d\n", p->stu.id, p->stu.name, p->stu.math, p->stu.eng, p->stu.C,
+               p->stu.sum);
+    } else {
+        printf("未查询到该生有关信息!\n");
+        system("pause");
+        return;
+    }
 }
 
+// 修改学生信息函数
 void ModifyStudentInfo() {
-
+    int id;
+    printf("请输入要修改的学生学号:");
+    scanf("%d", &id);
+    Node *p = firstHead;
+    while (p && (p->stu.id != id)) {
+        p = p->next;
+    }
+    if (p) {
+        printf("请输入新的信息:");
+        printf("-->请输入修改后的学号:");
+        scanf("%d", &p->stu.id);
+        printf("-->请输入修改后的姓名:");
+        scanf("%s", p->stu.name);
+        printf("-->请输入修改后的数学成绩:");
+        scanf("%d", &p->stu.math);
+        printf("-->请输入修改后的成绩:");
+        scanf("%d", &p->stu.eng);
+        printf("-->请输入修改后的C语言成绩:");
+        scanf("%d", &p->stu.C);
+        p->stu.sum = p->stu.math + p->stu.eng + p->stu.C;
+        save_date();
+        system("pause");
+        return;
+    } else {
+        printf("未查询到该生有关信息!\n");
+        system("pause");
+        return;
+    }
 }
 
+// 按学号删除学生信息函数
 void DeleteStudentInfo_id() {
-
+    int id;
+    printf("请输入要删除的学生学号:");
+    scanf("%d", &id);
+    Node *p = firstHead;
+    while (1) {
+        if (p->next && (p->next->stu.id == id)) {
+            Node *useless = p->next;
+            p->next = p->next->next;
+            printf("该生有关信息已删除!");
+            system("pause");
+            free(useless);
+            save_date();
+            return;
+        } else {
+            if (p->next != NULL) {
+                p = p->next;
+            } else {
+                printf("信息删除失败!");
+                system("pause");
+                return;
+            }
+        }
+    }
 }
 
+// 按姓名删除学生信息函数
 void DeleteStudentInfo_name() {
-
+    char name[20];
+    printf("请输入要删除的学生姓名:");
+    scanf("%s", name);
+    Node *p = firstHead;
+    while (1) {
+        if (p->next && (strcmp(p->stu.name, name) == 0)) {
+            Node *useless = p->next;
+            p->next = p->next->next;
+            printf("该生有关信息已删除!");
+            system("pause");
+            free(useless);
+            save_date();
+            return;
+        } else {
+            if (p->next != NULL) {
+                p = p->next;
+            } else {
+                printf("信息删除失败!");
+                system("pause");
+                return;
+            }
+        }
+    }
 }
 
+// 永久循环体函数
 int Loop() {
     while (1) {
         int ch, sea, mo;
-        printf("请选择：");
+        menu();
+        printf("->请选择：");
         scanf("%d", &ch);
         switch (ch) {
             case 1:
@@ -179,17 +333,14 @@ int Loop() {
                 ViewStudentInfo();
                 break;
             case 3:
-                AddStudentInfo();
-                break;
-            case 4:
                 GradesRanking();
                 break;
-            case 5:
+            case 4:
                 printf("\n");
                 printf("[1] 【按学号搜索】\n");
                 printf("[2] 【按姓名搜索】\n");
                 printf("[3] 【返回】\n");
-                printf("->请选择:");
+                printf("-->请选择:");
                 scanf("%d", &sea);
                 switch (sea) {
                     case 1:
@@ -200,15 +351,15 @@ int Loop() {
                         break;
                 }
                 break;
-            case 6:
+            case 5:
                 ModifyStudentInfo();
                 break;
-            case 7:
+            case 6:
                 printf("\n");
                 printf("[1] 【按学号删除】\n");
                 printf("[2] 【按姓名删除】\n");
                 printf("[3] 【返回】\n");
-                printf("->请选择:");
+                printf("-->请选择:");
                 scanf("%d", &mo);
                 switch (mo) {
                     case 1:
