@@ -1,46 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdlib.h>
+#include <string.h>
 
 struct student {
-    int id; //å­¦å·
-    char name[20]; //å§“å
-    int math;  //æ•°å­¦æˆç»©
-    int eng;  // è‹±è¯­æˆç»©
-    int C;    //Cè¯­è¨€æˆç»©
-    int sum;  //æ€»æˆç»©
-    double av;  //å¹³å‡æˆç»©
-} stu, n;  //ä¿å­˜nä¸ªäººçš„ä¿¡æ¯
+    int id; //Ñ§ºÅ
+    char name[20]; //ĞÕÃû
+    int math;  //ÊıÑ§³É¼¨
+    int eng;  // Ó¢Óï³É¼¨
+    int C;    //CÓïÑÔ³É¼¨
+    int sum;  //×Ü³É¼¨
+} stu[200], n;  //±£´æn¸öÈËµÄĞÅÏ¢
 
-// å½•å…¥å­¦ç”Ÿä¿¡æ¯
+// Â¼ÈëÑ§ÉúĞÅÏ¢
 void InputStudentInfo();
 
-// æŸ¥çœ‹å­¦ç”Ÿä¿¡æ¯
+// ²é¿´Ñ§ÉúĞÅÏ¢
 void ViewStudentInfo();
 
-//æ€»æˆç»©æ’åº
+//×Ü³É¼¨ÅÅĞò
 void Grade_ranking();
 
-//æœç´¢å­¦ç”Ÿä¿¡æ¯(id)
+//ËÑË÷Ñ§ÉúĞÅÏ¢(id)
 void SearchStudentInfo_id();
 
-//æœç´¢å­¦ç”Ÿä¿¡æ¯(name)
+//ËÑË÷Ñ§ÉúĞÅÏ¢(name)
 void SearchStudentInfo_name();
 
-//ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯
+//ĞŞ¸ÄÑ§ÉúĞÅÏ¢
 void ModifyStudentInfo();
 
-//åˆ é™¤å­¦ç”Ÿä¿¡æ¯(id)
+//É¾³ıÑ§ÉúĞÅÏ¢(id)
 void DeleteStudentInfo_id();
 
-//åˆ é™¤å­¦ç”Ÿä¿¡æ¯(name)
+//É¾³ıÑ§ÉúĞÅÏ¢(name)
 void DeleteStudentInfo_name();
 
-//æ°¸ä¹…å¾ªç¯ä½“
+//ÓÀ¾ÃÑ­»·Ìå
 int Loop();
 
-//æ‰“å¼€æ–‡ä»¶ä¿å­˜ä¿¡æ¯å‡½æ•°
-void save_date();
+//´ò¿ªÎÄ¼ş²¢´æ´¢ĞÅÏ¢
+void save_date(int num);
+
+//¶ÁÈ¡ÎÄ¼şĞÅÏ¢
+int get_Info();
 
 int main() {
     Loop();
@@ -48,21 +50,21 @@ int main() {
     return 0;
 }
 
-// menuè¡¨ç¤ºèœå•
+// menu±íÊ¾²Ëµ¥
 void menu() {
     printf("\n\n\n");
     printf("    **********************************************\n");
-    printf("    *          æ¬¢è¿ä½¿ç”¨å­¦ç”Ÿç®¡ç†ç®¡ç†ç³»ç»Ÿ               *\n");
+    printf("    *          »¶Ó­Ê¹ÓÃÑ§Éú¹ÜÀí¹ÜÀíÏµÍ³               *\n");
     printf("    **********************************************\n");
-    printf("    *             è¯·é€‰æ‹©åŠŸèƒ½åˆ—è¡¨                    *\n");
+    printf("    *             ÇëÑ¡Ôñ¹¦ÄÜÁĞ±í                    *\n");
     printf("    **********************************************\n");
-    printf("    *          [1] å½•å…¥å­¦ç”Ÿä¿¡æ¯                    *\n");
-    printf("    *          [2] æŸ¥çœ‹å­¦ç”Ÿä¿¡æ¯                    *\n");
-    printf("    *          [3] æŒ‰æ€»æˆç»©æ’åº                    *\n");
-    printf("    *          [4] æœç´¢å­¦ç”Ÿä¿¡æ¯                    *\n");
-    printf("    *          [5] ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯                    *\n");
-    printf("    *          [6] åˆ é™¤å­¦ç”Ÿä¿¡æ¯                    *\n");
-    printf("    *          [0] é€€å‡ºç³»ç»Ÿ                       *\n");
+    printf("    *          [1] Â¼ÈëÑ§ÉúĞÅÏ¢                    *\n");
+    printf("    *          [2] ²é¿´Ñ§ÉúĞÅÏ¢                    *\n");
+    printf("    *          [3] °´×Ü³É¼¨ÅÅĞò                    *\n");
+    printf("    *          [4] ËÑË÷Ñ§ÉúĞÅÏ¢                    *\n");
+    printf("    *          [5] ĞŞ¸ÄÑ§ÉúĞÅÏ¢                    *\n");
+    printf("    *          [6] É¾³ıÑ§ÉúĞÅÏ¢                    *\n");
+    printf("    *          [0] ÍË³öÏµÍ³                       *\n");
     printf("    **********************************************\n");
 }
 
@@ -70,7 +72,7 @@ int Loop() {
     while (1) {
         int ch, sea, mo;
         menu();
-        printf("->è¯·é€‰æ‹©ï¼š");
+        printf("->ÇëÑ¡Ôñ£º");
         scanf("%d", &ch);
         switch (ch) {
             case 1:
@@ -84,10 +86,10 @@ int Loop() {
                 break;
             case 4:
                 printf("\n");
-                printf("[1] ã€æŒ‰å­¦å·æœç´¢ã€‘\n");
-                printf("[2] ã€æŒ‰å§“åæœç´¢ã€‘\n");
-                printf("[3] ã€è¿”å›ã€‘\n");
-                printf("-->è¯·é€‰æ‹©:");
+                printf("[1] ¡¾°´Ñ§ºÅËÑË÷¡¿\n");
+                printf("[2] ¡¾°´ĞÕÃûËÑË÷¡¿\n");
+                printf("[3] ¡¾·µ»Ø¡¿\n");
+                printf("-->ÇëÑ¡Ôñ:");
                 scanf("%d", &sea);
                 switch (sea) {
                     case 1:
@@ -105,22 +107,27 @@ int Loop() {
                 break;
             case 6:
                 printf("\n");
-                printf("[1] ã€æŒ‰å­¦å·åˆ é™¤ã€‘\n");
-                printf("[2] ã€æŒ‰å§“ååˆ é™¤ã€‘\n");
-                printf("[3] ã€è¿”å›ã€‘\n");
-                printf("-->è¯·é€‰æ‹©:");
+                printf("[1] ¡¾°´Ñ§ºÅÉ¾³ı¡¿\n");
+                printf("[2] ¡¾°´ĞÕÃûÉ¾³ı¡¿\n");
+                printf("[3] ¡¾·µ»Ø¡¿\n");
+                printf("-->ÇëÑ¡Ôñ:");
                 scanf("%d", &mo);
                 switch (mo) {
                     case 1:
                         DeleteStudentInfo_id();
+                        break;
                     case 2:
                         DeleteStudentInfo_name();
+                        break;
                     case 3:
                         break;
                 }
                 break;
+            case 9:
+                get_Info();
+                break;
             case 0:
-                //é€€å‡ºç³»ç»Ÿ
+                //ÍË³öÏµÍ³
                 exit(0);
             default:
                 break;
@@ -128,70 +135,262 @@ int Loop() {
     }
 }
 
-// æ‰“å¼€æ–‡ä»¶ä¿å­˜ä¿¡æ¯å‡½æ•°
-void save_date() {
+// ´ò¿ªÎÄ¼ş±£´æĞÅÏ¢º¯Êı,numÎª±£´æ¸öÊı
+void save_date(int num) {
     char value[5];
-    printf("æ˜¯å¦å°†ä¿¡æ¯åˆ°æ–‡ä»¶ä¸­:\n");
-    printf("ã€Yã€‘ / ã€Nã€‘\n");
+    printf("ÊÇ·ñ±£´æĞÅÏ¢:\n");
+    printf("¡¾Y¡¿ / ¡¾N¡¿\n");
     printf("-->");
     scanf("%s", value);
     if (strcmp(value, "Y") == 0) {
-        Node *p = Head;
         FILE *fp = NULL;
-        fp = fopen("../data.txt", "a+");
-        while (p != NULL) {
-            fprintf(fp, "%d\t%s\t%d\t%s\t%s\t%d\n", p->wor.id, p->wor.name, p->wor.age, p->wor.post, p->wor.bra,
-                    p->wor.pay);
-            p = p->next;
+        fp = fopen("../data.txt", "w+");
+        for (int i = 0; i < num; ++i) {
+            fprintf(fp, "%d\t%s\t%d\t%d\t%d\t%d\n", stu[i].id, stu[i].name, stu[i].math, stu[i].eng, stu[i].C,
+                    stu[i].sum);
         }
-        printf("æ•°æ®ä¿å­˜æˆåŠŸ!\n");
+        printf("Êı¾İ±£´æ³É¹¦!\n");
         fclose(fp);
         system("pause");
         return;
     }
     if (strcmp(value, "N") == 0) {
-        printf("è¯·æ³¨æ„,æ•°æ®æœªä¿å­˜,è¯·å…ˆä¿å­˜åæ“ä½œ,é¿å…ä¸¢å¤±æ•°æ®!\n");
+        printf("Çë×¢Òâ,Êı¾İÎ´±£´æ,ÇëÏÈ±£´æºó²Ù×÷,±ÜÃâ¶ªÊ§Êı¾İ!\n");
         system("pause");
         return;
     }
 }
 
-// å½•å…¥å­¦ç”Ÿä¿¡æ¯
+// Â¼ÈëÑ§ÉúĞÅÏ¢
 void InputStudentInfo() {
-
+    int val, num = get_Info();
+    printf("ÇëÊäÈëÒªÂ¼ÈëµÄÑ§Éú¸öÊı:");
+    scanf("%d", &val);
+    for (int i = num; i < num + val; ++i) {
+        printf("->ÇëÊäÈëµÚ %d Î»Ñ§ÉúĞÅÏ¢:\n", i + 1);
+        printf("-->Ñ§ºÅ:");
+        scanf("%d", &stu[i].id);
+        printf("-->ĞÕÃû:");
+        scanf("%s", stu[i].name);
+        printf("-->ÊıÑ§³É¼¨:");
+        scanf("%d", &stu[i].math);
+        printf("-->Ó¢Óï³É¼¨:");
+        scanf("%d", &stu[i].eng);
+        printf("-->CÓïÑÔ³É¼¨:");
+        scanf("%d", &stu[i].C);
+        stu[i].sum = stu[i].math + stu[i].eng + stu[i].C;
+    }
+    save_date(num + val);
 }
 
-// æŸ¥çœ‹å­¦ç”Ÿä¿¡æ¯
+// ²é¿´Ñ§ÉúĞÅÏ¢
 void ViewStudentInfo() {
-
+    char ch;
+    FILE *fp;
+    fp = fopen("../data.txt", "a+");
+    ch = fgetc(fp);
+    if (ch == EOF) {
+        printf("Î´´æ´¢ÈÎºÎÑ§ÉúĞÅÏ¢£¡ÇëÏÈ´¢´æĞÅÏ¢ºó²Ù×÷£¡\n");
+        system("pause");
+        return;
+    }
+    printf("****ËùÓĞÑ§ÉúĞÅÏ¢****\n");
+    printf("Ñ§ºÅ\tĞÕÃû\tÊıÑ§\tÓ¢Óï\tCÓïÑÔ\t×Ü·Ö\n");
+    putchar(ch);
+    while ((ch = fgetc(fp)) != EOF) {
+        putchar(ch);
+    }
+    fclose(fp);
+    system("pause");
 }
 
-//æ€»æˆç»©æ’åº
+//×Ü³É¼¨ÅÅĞò
 void Grade_ranking() {
-
+    int num = get_Info();
+    if (num == 0) {
+        return;
+    }
+    int i, j;
+    for (i = 0; i < num; i++) {
+        for (j = i + 1; j < num; j++) {
+            if (stu[i].sum < stu[j].sum) {
+                n = stu[i];
+                stu[i] = stu[j];
+                stu[j] = n;
+            }
+        }
+    }
+    printf("****×Ü³É¼¨ÅÅĞò****\n");
+    printf("Ñ§ºÅ\tĞÕÃû\tÊıÑ§\tÓ¢Óï\tCÓïÑÔ\t×Ü·Ö\n");
+    for (int k = 0; k < num; ++k) {
+        printf("%d\t%s\t%d\t%d\t%d\t%d\n", stu[k].id, stu[k].name, stu[k].math, stu[k].eng, stu[k].C,
+               stu[k].sum);
+    }
+    system("pause");
 }
 
-//æœç´¢å­¦ç”Ÿä¿¡æ¯(id)
+//ËÑË÷Ñ§ÉúĞÅÏ¢(id)
 void SearchStudentInfo_id() {
-
+    int num = get_Info();
+    if (num == 0) {
+        return;
+    }
+    int value, count = 0;
+    printf("--->ÇëÊäÈëÑ§ºÅ:");
+    scanf("%d", &value);
+    for (int i = 0; i < num; ++i) {
+        if (value == stu[i].id) {
+            printf("Ñ§ºÅ\tĞÕÃû\tÊıÑ§\tÓ¢Óï\tCÓïÑÔ\t×Ü·Ö\n");
+            printf("%d\t%s\t%d\t%d\t%d\t%d\n", stu[i].id, stu[i].name, stu[i].math, stu[i].eng, stu[i].C,
+                   stu[i].sum);
+            ++count;
+            break;
+        }
+    }
+    if (count == 0) {
+        printf("ËÑË÷Ñ§ÉúĞÅÏ¢Ê§°Ü!\n");
+    }
+    system("pause");
 }
 
-//æœç´¢å­¦ç”Ÿä¿¡æ¯(name)
+//ËÑË÷Ñ§ÉúĞÅÏ¢(name)
 void SearchStudentInfo_name() {
-
+    int num = get_Info(), count = 0;
+    if (num == 0) {
+        return;
+    }
+    char find_name[20];
+    printf("--->ÇëÊäÈëĞÕÃû:");
+    scanf("%s", find_name);
+    for (int i = 0; i < num; ++i) {
+        if (strcmp(stu[i].name, find_name) == 0) {
+            printf("Ñ§ºÅ\tĞÕÃû\tÊıÑ§\tÓ¢Óï\tCÓïÑÔ\t×Ü·Ö\n");
+            printf("%d\t%s\t%d\t%d\t%d\t%d\n", stu[i].id, stu[i].name, stu[i].math, stu[i].eng, stu[i].C,
+                   stu[i].sum);
+            ++count;
+            break;
+        }
+    }
+    if (count == 0) {
+        printf("ËÑË÷Ñ§ÉúĞÅÏ¢Ê§°Ü!\n");
+    }
+    system("pause");
 }
 
-//ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯
+//ĞŞ¸ÄÑ§ÉúĞÅÏ¢
 void ModifyStudentInfo() {
-
+    int num = get_Info(), count = 0;  // ÏÈ»ñÈ¡µÄÑ§Éú¸öÊı
+    if (num == 0) {
+        return;
+    }
+    int val;
+    printf("ÇëÊäÈëÑ§ºÅ:");
+    scanf("%d", &val);
+    for (int i = 0; i < num; ++i) {
+        if (stu[i].id == val) {
+            printf("ÇëÊäÈëĞŞ¸ÄºóµÄÑ§ºÅ:");
+            scanf("%d", &stu[i].id);
+            printf("ÇëÊäÈëĞŞ¸ÄºóµÄĞÕÃû:");
+            scanf("%s", stu[i].name);
+            printf("ÇëÊäÈëĞŞ¸ÄºóµÄÊıÑ§³É¼¨:");
+            scanf("%d", &stu[i].math);
+            printf("ÇëÊäÈëĞŞ¸ÄºóµÄÓ¢Óï³É¼¨:");
+            scanf("%d", &stu[i].eng);
+            printf("ÇëÊäÈëĞŞ¸ÄºóµÄCÓïÑÔ³É¼¨:");
+            scanf("%d", &stu[i].C);
+            stu[i].sum = stu[i].math + stu[i].eng + stu[i].C;
+            ++count;
+            break;
+        }
+    }
+    if (count == 0) {
+        printf("Î´²éÕÒµ½¸ÃÑ§Éú!\n");
+    }
+    system("pause");
+    save_date(num); // ±£´æÊı¾İº¯Êı
 }
 
-//åˆ é™¤å­¦ç”Ÿä¿¡æ¯(id)
+//É¾³ıÑ§ÉúĞÅÏ¢(id)
 void DeleteStudentInfo_id() {
-
+    int num = get_Info(), count = 0, val;
+    if (num == 0) {
+        return;
+    }
+    printf("--->ÇëÊäÈëÑ§ºÅ:");
+    scanf("%d", &val);
+    for (int i = 0; i < num; ++i) {
+        if (stu[i].id == val) {
+            for (int j = i; j < num; ++j) {
+                stu[j] = stu[j + 1];
+            }
+            ++count;
+            printf("É¾³ıĞÅÏ¢³É¹¦!\n");
+            save_date(num - 1);
+            break;
+        }
+    }
+    if (count == 0) {
+        printf("É¾³ıĞÅÏ¢Ê§°Ü!\n");
+    }
+    system("pause");
 }
 
-//åˆ é™¤å­¦ç”Ÿä¿¡æ¯(name)
+//É¾³ıÑ§ÉúĞÅÏ¢(name)
 void DeleteStudentInfo_name() {
+    int num = get_Info(), count = 0;
+    if (num == 0) {
+        return;
+    }
+    char del_name[20];
+    printf("--->ÇëÊäÈëĞÕÃû:");
+    scanf("%s", del_name);
+    for (int i = 0; i < num; ++i) {
+        if (strcmp(stu[i].name, del_name) == 0) {
+            for (int k = i; k < num; ++k) {
+                stu[k] = stu[k + 1];
+            }
+            ++count;
+            printf("É¾³ıĞÅÏ¢³É¹¦!\n");
+            save_date(num - 1);
+            break;
+        }
+    }
+    if (count == 0) {
+        printf("É¾³ıĞÅÏ¢Ê§°Ü!\n");
+    }
+    system("pause");
+}
 
+// ¶ÁÈ¡ÎÄ¼şĞÅÏ¢
+int get_Info() {
+    int num = 0, i = 0;
+    char ch, val;
+    FILE *fp;
+    fp = fopen("../data.txt", "a+");
+    ch = fgetc(fp);
+    if (ch == EOF) {
+        printf("Î´´æ´¢ÈÎºÎÑ§ÉúĞÅÏ¢£¡ÇëÏÈ´¢´æĞÅÏ¢ºó²Ù×÷£¡\n");
+        system("pause");
+        return 0;
+    } else {
+        fp = fopen("../data.txt", "a+");
+        while ((feof(fp) == 0)) {
+            fscanf(fp, "%d", &stu[i].id);
+            fgetc(fp);
+            fscanf(fp, "%s", stu[i].name);
+            fgetc(fp);
+            fscanf(fp, "%d", &stu[i].math);
+            fgetc(fp);
+            fscanf(fp, "%d", &stu[i].eng);
+            fgetc(fp);
+            fscanf(fp, "%d", &stu[i].C);
+            fgetc(fp);
+            fscanf(fp, "%d", &stu[i].sum);
+            fgetc(fp);
+            ++i;
+            ++num;
+        }
+        --num;
+    }
+    return num;
 }

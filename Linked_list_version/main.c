@@ -139,7 +139,7 @@ void InputWorkerInfo() {
         scanf("%d", &p->wor.age);
         printf("-->部门:");
         scanf("%s", p->wor.bra);
-        printf("-->C职位:");
+        printf("-->职位:");
         scanf("%s", p->wor.post);
         printf("-->工资:");
         scanf("%d", &p->wor.pay);
@@ -411,8 +411,10 @@ int Loop() {
                 switch (mo) {
                     case 1:
                         DeleteWorkerInfo_id();
+                        break;
                     case 2:
                         DeleteWorkerInfo_name();
+                        break;
                     case 3:
                         break;
                 }
