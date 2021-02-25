@@ -157,22 +157,6 @@ void InputWorkerInfo() {
 }
 
 // 查看员工信息函数
-//void ViewWorkerInfo() {
-//    //遍历链表
-//    Node *p = Head;
-//    while (p != NULL) {
-//        printf("工号\t姓名\t年龄\t部门\t职位\t工资\n");
-//        printf("%d\t%s\t%d\t%s\t%s\t%d\n", p->wor.id, p->wor.name, p->wor.age, p->wor.bra, p->wor.post,
-//               p->wor.pay);
-//        p = p->next;
-//    }
-//    if (Head == NULL) {
-//        printf("没有存储任何员工信息!\n");
-//    }
-//    system("pause");
-//}
-
-// 查看员工信息函数
 void ViewWorkerInfo() {
     char ch;
     FILE *fp = NULL;
