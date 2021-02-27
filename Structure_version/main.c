@@ -39,7 +39,7 @@ void DeleteStudentInfo_name();
 int Loop();
 
 //打开文件并存储信息
-void save_date(int num);
+void save_data(int num);
 
 //读取文件信息
 int get_Info();
@@ -136,7 +136,7 @@ int Loop() {
 }
 
 // 打开文件保存信息函数,num为保存个数
-void save_date(int num) {
+void save_data(int num) {
     char value[5];
     printf("是否保存信息:\n");
     printf("【Y】 / 【N】\n");
@@ -180,7 +180,7 @@ void InputStudentInfo() {
         scanf("%d", &stu[i].C);
         stu[i].sum = stu[i].math + stu[i].eng + stu[i].C;
     }
-    save_date(num + val);
+    save_data(num + val);
 }
 
 // 查看学生信息
@@ -307,7 +307,7 @@ void ModifyStudentInfo() {
         printf("未查找到该学生!\n");
     }
     system("pause");
-    save_date(num); // 保存数据函数
+    save_data(num); // 保存数据函数
 }
 
 //删除学生信息(id)
@@ -325,7 +325,7 @@ void DeleteStudentInfo_id() {
             }
             ++count;
             printf("删除信息成功!\n");
-            save_date(num - 1);
+            save_data(num - 1);
             break;
         }
     }
@@ -351,7 +351,7 @@ void DeleteStudentInfo_name() {
             }
             ++count;
             printf("删除信息成功!\n");
-            save_date(num - 1);
+            save_data(num - 1);
             break;
         }
     }
