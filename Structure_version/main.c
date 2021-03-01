@@ -5,9 +5,9 @@
 struct student {
     int id; //学号
     char name[20]; //姓名
-    int math;  //数学成绩
-    int eng;  // 英语成绩
-    int C;    //C语言成绩
+    int literature;  //语文成绩
+    int math;  // 数学成绩
+    int eng;    //英语成绩
     int sum;  //总成绩
 } stu[200], n;  //保存n个人的信息
 
@@ -35,7 +35,7 @@ void DeleteStudentInfo_id();
 //删除学生信息(name)
 void DeleteStudentInfo_name();
 
-//永久循环体
+//程序循环体
 int Loop();
 
 //打开文件并存储信息
@@ -130,6 +130,8 @@ int Loop() {
                 //退出系统
                 exit(0);
             default:
+                printf("输入错误，请重新输入！\n\n");
+                system("pause");
                 break;
         }
     }
@@ -146,7 +148,7 @@ void save_data(int num) {
         FILE *fp = NULL;
         fp = fopen("../data.txt", "w+");
         for (int i = 0; i < num; ++i) {
-            fprintf(fp, "%d\t%s\t%d\t%d\t%d\t%d\n", stu[i].id, stu[i].name, stu[i].math, stu[i].eng, stu[i].C,
+            fprintf(fp, "%d\t%s\t%d\t%d\t%d\t%d\n", stu[i].id, stu[i].name, stu[i].literature, stu[i].math, stu[i].eng,
                     stu[i].sum);
         }
         printf("数据保存成功!\n");
@@ -172,13 +174,13 @@ void InputStudentInfo() {
         scanf("%d", &stu[i].id);
         printf("-->姓名:");
         scanf("%s", stu[i].name);
+        printf("-->语文成绩:");
+        scanf("%d", &stu[i].literature);
         printf("-->数学成绩:");
         scanf("%d", &stu[i].math);
         printf("-->英语成绩:");
         scanf("%d", &stu[i].eng);
-        printf("-->C语言成绩:");
-        scanf("%d", &stu[i].C);
-        stu[i].sum = stu[i].math + stu[i].eng + stu[i].C;
+        stu[i].sum = stu[i].literature + stu[i].math + stu[i].eng;
     }
     save_data(num + val);
 }
@@ -195,7 +197,7 @@ void ViewStudentInfo() {
         return;
     }
     printf("****所有学生信息****\n");
-    printf("学号\t姓名\t数学\t英语\tC语言\t总分\n");
+    printf("学号\t姓名\t语文\t数学\t英语\t总分\n");
     putchar(ch);
     while ((ch = fgetc(fp)) != EOF) {
         putchar(ch);
@@ -211,7 +213,7 @@ void Grade_ranking() {
         return;
     }
     int i, j;
-    for (i = 0; i < num; i++) {
+    for (i = 0; i < num; i++) { // 使用冒泡排序
         for (j = i + 1; j < num; j++) {
             if (stu[i].sum < stu[j].sum) {
                 n = stu[i];
@@ -221,9 +223,9 @@ void Grade_ranking() {
         }
     }
     printf("****总成绩排序****\n");
-    printf("学号\t姓名\t数学\t英语\tC语言\t总分\n");
+    printf("学号\t姓名\t语文\t数学\t英语\t总分\n");
     for (int k = 0; k < num; ++k) {
-        printf("%d\t%s\t%d\t%d\t%d\t%d\n", stu[k].id, stu[k].name, stu[k].math, stu[k].eng, stu[k].C,
+        printf("%d\t%s\t%d\t%d\t%d\t%d\n", stu[k].id, stu[k].name, stu[k].literature, stu[k].math, stu[k].eng,
                stu[k].sum);
     }
     system("pause");
@@ -240,8 +242,8 @@ void SearchStudentInfo_id() {
     scanf("%d", &value);
     for (int i = 0; i < num; ++i) {
         if (value == stu[i].id) {
-            printf("学号\t姓名\t数学\t英语\tC语言\t总分\n");
-            printf("%d\t%s\t%d\t%d\t%d\t%d\n", stu[i].id, stu[i].name, stu[i].math, stu[i].eng, stu[i].C,
+            printf("学号\t姓名\t语文\t数学\t英语\t总分\n");
+            printf("%d\t%s\t%d\t%d\t%d\t%d\n", stu[i].id, stu[i].name, stu[i].literature, stu[i].math, stu[i].eng,
                    stu[i].sum);
             ++count;
             break;
@@ -264,8 +266,8 @@ void SearchStudentInfo_name() {
     scanf("%s", find_name);
     for (int i = 0; i < num; ++i) {
         if (strcmp(stu[i].name, find_name) == 0) {
-            printf("学号\t姓名\t数学\t英语\tC语言\t总分\n");
-            printf("%d\t%s\t%d\t%d\t%d\t%d\n", stu[i].id, stu[i].name, stu[i].math, stu[i].eng, stu[i].C,
+            printf("学号\t姓名\t语文\t数学\t英语\t总分\n");
+            printf("%d\t%s\t%d\t%d\t%d\t%d\n", stu[i].id, stu[i].name, stu[i].literature, stu[i].math, stu[i].eng,
                    stu[i].sum);
             ++count;
             break;
@@ -292,13 +294,13 @@ void ModifyStudentInfo() {
             scanf("%d", &stu[i].id);
             printf("请输入修改后的姓名:");
             scanf("%s", stu[i].name);
+            printf("请输入修改后的语文成绩:");
+            scanf("%d", &stu[i].literature);
             printf("请输入修改后的数学成绩:");
             scanf("%d", &stu[i].math);
             printf("请输入修改后的英语成绩:");
             scanf("%d", &stu[i].eng);
-            printf("请输入修改后的C语言成绩:");
-            scanf("%d", &stu[i].C);
-            stu[i].sum = stu[i].math + stu[i].eng + stu[i].C;
+            stu[i].sum = stu[i].literature + stu[i].math + stu[i].eng;
             ++count;
             break;
         }
@@ -379,11 +381,11 @@ int get_Info() {
             fgetc(fp);
             fscanf(fp, "%s", stu[i].name);
             fgetc(fp);
+            fscanf(fp, "%d", &stu[i].literature);
+            fgetc(fp);
             fscanf(fp, "%d", &stu[i].math);
             fgetc(fp);
             fscanf(fp, "%d", &stu[i].eng);
-            fgetc(fp);
-            fscanf(fp, "%d", &stu[i].C);
             fgetc(fp);
             fscanf(fp, "%d", &stu[i].sum);
             fgetc(fp);
