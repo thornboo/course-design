@@ -407,6 +407,8 @@ int Loop() {
                 //退出系统
                 exit(0);
             default:
+                printf("输入错误，请重新输入！\n\n");
+                system("pause");
                 break;
         }
     }
@@ -420,5 +422,4 @@ void Authentication() {
     scanf("%s", account);
     printf("密码:");
     scanf("%s", password);
-
 }
