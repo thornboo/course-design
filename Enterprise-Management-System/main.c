@@ -207,8 +207,8 @@ void Salary_ranking() {
         }
     }
     printf("*****【工资排名】*****\n");
+    printf("工号\t姓名\t年龄\t部门\t职位\t工资\n");
     while (p != NULL) {
-        printf("工号\t姓名\t年龄\t部门\t职位\t工资\n");
         printf("%d\t%s\t%d\t%s\t%s\t%d\n", p->wor.id, p->wor.name, p->wor.age, p->wor.bra, p->wor.post,
                p->wor.pay);
         p = p->next;
