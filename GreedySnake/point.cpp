@@ -2,25 +2,25 @@
 #include "tools.h"
 #include <iostream>
 
-void Point::Print()//è¾“å‡ºæ–¹å—
+void Point::Print()  //Êä³ö·½¿é
 {
     SetCursorPosition(x, y);
-    std::cout << "â– ";
+    std::cout << "¡ö";
 }
 
-void Point::PrintCircular()//è¾“å‡ºåœ†å½¢
+void Point::PrintCircular()  //Êä³öÔ²ĞÎ
 {
     SetCursorPosition(x, y);
-    std::cout << "â—";
+    std::cout << "¡ñ";
 }
 
-void Point::Clear()//æ¸…é™¤è¾“å‡º
+void Point::Clear()  //Çå³ıÊä³ö
 {
     SetCursorPosition(x, y);
     std::cout << "  ";
 }
 
-void Point::ChangePosition(const int x, const int y)//æ”¹å˜åæ ‡
+void Point::ChangePosition(const int x, const int y)  //¸Ä±ä×ø±ê
 {
     this->x = x;
     this->y = y;

@@ -1,16 +1,16 @@
 #include "tools.h"
 #include <windows.h>
-#include <stdio.h>
+#include <cstdio>
 
-void SetWindowSize(int cols, int lines) //è®¾ç½®çª—å£å¤§å°
+void SetWindowSize(int cols, int lines) //ÉèÖÃ´°¿Ú´óĞ¡
 {
-    system("title è´ªåƒè›‡"); //è®¾ç½®çª—å£æ ‡é¢˜
+    system("title Ì°³ÔÉß"); //ÉèÖÃ´°¿Ú±êÌâ
     char cmd[30];
-    sprintf(cmd, "mode con cols=%d lines=%d", cols * 2, lines); //ä¸€ä¸ªå›¾å½¢â– å ä¸¤ä¸ªå­—ç¬¦ï¼Œæ•…å®½åº¦ä¹˜ä»¥2
-    system(cmd);  //system(mode con cols=88 lines=88)è®¾ç½®çª—å£å®½åº¦å’Œé«˜åº¦
+    sprintf(cmd, "Ä£Ê½ÉèÖÃ=%d lines=%d", cols * 2, lines); //Ò»¸öÍ¼ĞÎ¡öÕ¼Á½¸ö×Ö·û£¬¹Ê¿í¶È³ËÒÔ2
+    system(cmd);  //system(mode con cols=88 lines=88)ÉèÖÃ´°¿Ú¿í¶ÈºÍ¸ß¶È
 }
 
-void SetCursorPosition(const int x, const int y) //è®¾ç½®å…‰æ ‡ä½ç½®
+void SetCursorPosition(const int x, const int y) //ÉèÖÃ¹â±êÎ»ÖÃ
 {
     COORD position;
     position.X = x * 2;
@@ -18,12 +18,12 @@ void SetCursorPosition(const int x, const int y) //è®¾ç½®å…‰æ ‡ä½ç½®
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
 }
 
-void SetColor(int colorID)//è®¾ç½®æ–‡æœ¬é¢œè‰²
+void SetColor(int colorID)//ÉèÖÃÎÄ±¾ÑÕÉ«
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorID);
 }
 
-void SetBackColor() //è®¾ç½®æ–‡æœ¬èƒŒæ™¯è‰²
+void SetBackColor() //ÉèÖÃÎÄ±¾±³¾°É«
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
                             FOREGROUND_BLUE |

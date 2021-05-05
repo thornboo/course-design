@@ -25,10 +25,10 @@ public:
 
 private:
     int cnt;
-    bool flash_flag;//闪烁标记
-    bool big_flag;//是否有限时食物标记
+    bool flash_flag;  //闪烁标记
+    bool big_flag;  //是否有限时食物标记
     int x, y;
     int big_x, big_y;
-    int progress_bar;//限时食物进度条
-    friend class Snake;
+    int progress_bar;  //限时食物进度条
+    friend class Snake; //将Snake类置为友元，以便访问其私有元素
 };

@@ -1,7 +1,6 @@
-#ifndef GREEDYSNAKE_POINT_H
-#define GREEDYSNAKE_POINT_H
+#ifndef POINT_H
+#define POINT_H
 
-#endif //GREEDYSNAKE_POINT_H
 
 class Point {
 public:
@@ -24,5 +23,7 @@ public:
     int GetY() { return this->y; }
 
 private:
-    int x, y;
+    int x, y;  //光标的坐标
 };
+
+#endif //POINT_H

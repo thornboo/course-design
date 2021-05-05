@@ -2,15 +2,16 @@
 #include <conio.h>
 #include "tools.h"
 #include <iostream>
+#include "food.h"
 
-void Snake::InitSnake()//åˆå§‹åŒ–è›‡
+void Snake::InitSnake()//³õÊ¼»¯Éß
 {
     for (auto &point : snake) {
         point.PrintCircular();
     }
 }
 
-void Snake::Move()//è›‡å¢é•¿
+void Snake::Move()//ÉßÔö³¤
 {
     switch (direction) {
         case Direction::UP:
@@ -32,14 +33,14 @@ void Snake::Move()//è›‡å¢é•¿
     snake.back().PrintCircular();
 }
 
-void Snake::NormalMove()//è›‡æ­£å¸¸ç§»åŠ¨ï¼Œå¤´å¢é•¿ï¼Œå°¾ç¼©çŸ­
+void Snake::NormalMove()//ÉßÕı³£ÒÆ¶¯£¬Í·Ôö³¤£¬Î²Ëõ¶Ì
 {
     Move();
     snake.front().Clear();
     snake.pop_front();
 }
 
-bool Snake::OverEdge()//è¶…å‡ºè¾¹ç•Œ
+bool Snake::OverEdge()//³¬³ö±ß½ç
 {
     return snake.back().GetX() < 30 &&
            snake.back().GetY() < 30 &&
@@ -47,11 +48,11 @@ bool Snake::OverEdge()//è¶…å‡ºè¾¹ç•Œ
            snake.back().GetY() > 1;
 }
 
-bool Snake::HitItself()//æ’åˆ°è‡ªèº«
+bool Snake::HitItself()//×²µ½×ÔÉí
 {
     std::deque<Point>::size_type cnt = 1;
-    Point *head = new Point(snake.back().GetX(), snake.back().GetY());//è·å¾—å¤´éƒ¨åæ ‡
-    for (auto &point : snake) //å¦‚æœæ•´æ¡è›‡ä¸­ä¸è›‡å¤´ä¸ç›¸åŒçš„åæ ‡ä¸ç­‰äºè›‡é•¿ï¼Œåˆ™æ„å‘³ç€è›‡å¤´ç¢°æ’åˆ°è‡ªèº«
+    Point *head = new Point(snake.back().GetX(), snake.back().GetY());//»ñµÃÍ·²¿×ø±ê
+    for (auto &point : snake) //Èç¹ûÕûÌõÉßÖĞÓëÉßÍ·²»ÏàÍ¬µÄ×ø±ê²»µÈÓÚÉß³¤£¬ÔòÒâÎ¶×ÅÉßÍ·Åö×²µ½×ÔÉí
     {
         if (!(point == *head))
             ++cnt;
@@ -65,10 +66,10 @@ bool Snake::HitItself()//æ’åˆ°è‡ªèº«
         return false;
 }
 
-bool Snake::ChangeDirection()//æ”¹å˜æ–¹å‘
+bool Snake::ChangeDirection()//¸Ä±ä·½Ïò
 {
     char ch;
-    if (kbhit())//kbhitå‡½æ•°è¿”å›å€¼ä¸ºä¸¤ä¸ªï¼Œéœ€æ³¨æ„
+    if (kbhit())//kbhitº¯Êı·µ»ØÖµÎªÁ½¸ö£¬Ğè×¢Òâ
     {
         ch = getch();
         switch (ch) {
@@ -76,7 +77,7 @@ bool Snake::ChangeDirection()//æ”¹å˜æ–¹å‘
                 ch = getch();
                 switch (ch) {
                     case 72:
-                        if (direction != Direction::DOWN)//å¦‚æœæ–¹å‘ä¸å½“å‰è¿åŠ¨æ–¹å‘ç›¸åï¼Œæ— æ•ˆ
+                        if (direction != Direction::DOWN)//Èç¹û·½ÏòÓëµ±Ç°ÔË¶¯·½ÏòÏà·´£¬ÎŞĞ§
                             direction = Direction::UP;
                         break;
                     case 80:

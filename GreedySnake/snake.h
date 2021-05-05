@@ -1,11 +1,8 @@
 #ifndef GREEDYSNAKE_SNAKE_H
 #define GREEDYSNAKE_SNAKE_H
 
-#endif //GREEDYSNAKE_SNAKE_H
-
 #include <deque>
 #include "point.h"
-#include "food.h"
 
 class Food;
 
@@ -42,5 +39,7 @@ private:
     std::deque<Point> snake;
     Direction direction;
 
-    friend class Food;//将Food类置为友元，以便访问其私有元素
+    friend class Food; //将Food类置为友元，以便访问其私有元素
 };
+
+#endif //GREEDYSNAKE_SNAKE_H

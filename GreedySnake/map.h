@@ -3,15 +3,12 @@
 
 #endif //GREEDYSNAKE_MAP_H
 
-#ifndef MAP_H
-#define MAP_H
-
 #include <vector>
 #include "point.h"
 
 class Map {
 public:
-    Map()//默认构造函数，将正方形各点压入initmap
+    Map()  //默认构造函数，将正方形各点压入initmap
     {
         initmap.emplace_back(Point(1, 1));
         initmap.emplace_back(Point(2, 1));
@@ -131,13 +128,11 @@ public:
         initmap.emplace_back(Point(30, 30));
     }
 
-    void PrintInitmap();//绘制初始地图
+    void PrintInitmap();  //绘制初始地图
 private:
-    std::vector<Point> initmap;//保存初始地图
+    std::vector<Point> initmap;  //保存初始地图
     /*Map类可自定义多种地图，只需将表示地图的各个点保存在相应的map中，并在Snake类中增加相应判断撞墙函数即可
     std::vector<Point> map1;
     std::vector<Point> map2;
     */
 };
-
-#endif // MAP_H
