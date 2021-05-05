@@ -23,9 +23,9 @@ void SystemMenu::mainUI() {
 
 void SystemMenu::run() {
 
-    while (1) {
+    while (true) {
         mainUI();
-        cout << "-->«Î ‰»Î:" << endl;
+        cout << "-->«Î ‰»Î:";
         int value;
         cin >> value;
 

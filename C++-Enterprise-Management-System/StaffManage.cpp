@@ -271,10 +271,12 @@ void StaffManage::showAllStaffInfos() {
 //程序启动时，将文件中的数据加载到程序中
 void StaffManage::readDatas() {
     fstream inFile;
-    inFile.open("data.dat", ios::in);
+    inFile.open("..\\staffdatas.dat", ios::in);
     if (!inFile) {
         cout << "打开文件失败!" << endl;
         exit(1);
+    } else {
+        cout << "数据读取成功！" << endl;
     }
 
     while (!inFile.eof())  // 判断文件是否读取结束
@@ -283,11 +285,10 @@ void StaffManage::readDatas() {
             inFile.close();
             break;
         } else {
-            //i就是staffDutyType
-            int i;
-            inFile >> i;//读取文件中当前行第一列的值，自动以" "分割的
+            int i;  //i就是staffDutyType
+            inFile >> i;//读取文件中当前行第一列的值，以" "分割的
             count++;
-            if (count == 1)// 判断链表中是否有指针对象
+            if (count == 1) // 判断链表中是否已经有指针对象
             {
                 switch (i) {
                     case 1: {
@@ -436,7 +437,7 @@ void StaffManage::readDatas() {
 //在程序退出或添加，修改，删除时，将数据保存到文件中
 void StaffManage::writeDatas() {
     fstream outFile;
-    outFile.open("data.dat", ios::out);
+    outFile.open("..\\staffdatas.dat", ios::out | ios::app);
 
     if (!outFile) {
         cout << "打开文件失败!" << endl;
