@@ -1,5 +1,5 @@
 #include <iostream>
-#include <time.h>
+#include <ctime>
 #include <conio.h>
 #include <windows.h>
 #include "controller.h"
@@ -19,7 +19,7 @@ void Controller::Start()//开始界面
 
     /*设置关标位置，并输出提示语，等待任意键输入结束*/
     SetCursorPosition(13, 26);
-    std::cout << "按任意键开始...";
+//    std::cout << "按任意键开始...";
     SetCursorPosition(13, 27);
     system("pause");
 }
@@ -181,7 +181,7 @@ void Controller::DrawGame()//绘制游戏界面
     SetCursorPosition(34, 2);
     std::cout << "贪吃蛇";
     SetCursorPosition(31, 4);
-    std::cout << "难度：";
+    std::cout << "难度:";
     SetCursorPosition(36, 5);
     switch (key) {
         case 1:
@@ -200,7 +200,7 @@ void Controller::DrawGame()//绘制游戏界面
             break;
     }
     SetCursorPosition(31, 7);
-    std::cout << "得分：";
+    std::cout << "得分:";
     SetCursorPosition(37, 8);
     std::cout << "     0";
     SetCursorPosition(33, 13);
@@ -245,20 +245,20 @@ int Controller::PlayGame()//游戏二级循环
             }
         }
 
-        if (csnake->GetFood(*cfood)) //吃到食物
+        if (csnake->GetFood(*cfood))      //吃到食物
         {
-            csnake->Move();//蛇增长
-            UpdateScore(1);//更新分数，1为分数权重
-            RewriteScore();//重新绘制分数
-            cfood->DrawFood(*csnake);//绘制新食物
+            csnake->Move();               //蛇增长
+            UpdateScore(1);          //更新分数，1为分数权重
+            RewriteScore();               //重新绘制分数
+            cfood->DrawFood(*csnake);  //绘制新食物
         } else {
-            csnake->NormalMove();//蛇正常移动
+            csnake->NormalMove();          //蛇正常移动
         }
 
         if (csnake->GetBigFood(*cfood)) //吃到限时食物
         {
             csnake->Move();
-            UpdateScore(cfood->GetProgressBar() / 5);//分数根据限时食物进度条确定
+            UpdateScore(cfood->GetProgressBar() / 5);  // 分数根据限时食物进度条确定
             RewriteScore();
         }
 
@@ -267,13 +267,13 @@ int Controller::PlayGame()//游戏二级循环
             cfood->FlashBigFood();
         }
 
-        Sleep(speed);//制造蛇的移动效果
+        Sleep(speed);  // 制造蛇的移动效果
     }
 
     /*蛇死亡*/
-    delete csnake;//释放分配的内存空间
+    delete csnake;  // 释放分配的内存空间
     delete cfood;
-    int tmp = GameOver();//绘制游戏结束界面，并返回所选项
+    int tmp = GameOver();  // 绘制游戏结束界面，并返回所选项
     switch (tmp) {
         case 1:
             return 1;//重新开始
@@ -286,7 +286,7 @@ int Controller::PlayGame()//游戏二级循环
 
 void Controller::UpdateScore(const int &tmp)//更新分数
 {
-    score += key * 10 * tmp;//所得分数根据游戏难度及传人的参数tmp确定
+    score += key * 10 * tmp;  // 所得分数根据游戏难度及传人的参数tmp确定
 }
 
 void Controller::RewriteScore()//重绘分数
@@ -311,7 +311,7 @@ int Controller::Menu()//选择菜单
     /*绘制菜单*/
     SetColor(11);
     SetCursorPosition(32, 19);
-    std::cout << "菜单：";
+    std::cout << "菜单";
     Sleep(100);
     SetCursorPosition(34, 21);
     SetBackColor();
@@ -443,50 +443,50 @@ int Controller::GameOver()//游戏结束界面
     std::cout << "━━━━━━━━━━━━━━━━━━━━━━";
     Sleep(30);
     SetCursorPosition(9, 9);
-    std::cout << " ┃               Game Over !!!              ┃";
+    std::cout << " ┃         游戏结束！           ┃";
     Sleep(30);
     SetCursorPosition(9, 10);
-    std::cout << " ┃                                          ┃";
+    std::cout << " ┃                            ┃";
     Sleep(30);
     SetCursorPosition(9, 11);
-    std::cout << " ┃              很遗憾！你挂了              ┃";
+    std::cout << " ┃         很遗憾！             ┃";
     Sleep(30);
     SetCursorPosition(9, 12);
-    std::cout << " ┃                                          ┃";
+    std::cout << " ┃                            ┃";
     Sleep(30);
     SetCursorPosition(9, 13);
-    std::cout << " ┃             你的分数为：                 ┃";
+    std::cout << " ┃         你的分数为:          ┃";
     SetCursorPosition(24, 13);
     std::cout << score;
     Sleep(30);
     SetCursorPosition(9, 14);
-    std::cout << " ┃                                          ┃";
+    std::cout << " ┃                            ┃";
     Sleep(30);
     SetCursorPosition(9, 15);
-    std::cout << " ┃   是否再来一局？                         ┃";
+    std::cout << " ┃         是否继续?            ┃";
     Sleep(30);
     SetCursorPosition(9, 16);
-    std::cout << " ┃                                          ┃";
+    std::cout << " ┃                            ┃";
     Sleep(30);
     SetCursorPosition(9, 17);
-    std::cout << " ┃                                          ┃";
+    std::cout << " ┃                            ┃";
     Sleep(30);
     SetCursorPosition(9, 18);
-    std::cout << " ┃    嗯，好的        不了，还是学习有意思  ┃";
+    std::cout << " ┃    YES             NO      ┃";
     Sleep(30);
     SetCursorPosition(9, 19);
-    std::cout << " ┃                                          ┃";
+    std::cout << " ┃                            ┃";
     Sleep(30);
     SetCursorPosition(9, 20);
-    std::cout << " ┃                                          ┃";
+    std::cout << " ┃                            ┃";
     Sleep(30);
     SetCursorPosition(10, 21);
-    std::cout << "━━━━━━━━━━━━━━━━━━━━━━";
+    std::cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
 
     Sleep(100);
     SetCursorPosition(12, 18);
     SetBackColor();
-    std::cout << "嗯，好的";
+    std::cout << "YES";
     SetCursorPosition(0, 31);
 
     /*选择部分*/
@@ -499,10 +499,10 @@ int Controller::GameOver()//游戏结束界面
                 if (tmp_key > 1) {
                     SetCursorPosition(12, 18);
                     SetBackColor();
-                    std::cout << "嗯，好的";
+                    std::cout << "YES";
                     SetCursorPosition(20, 18);
                     SetColor(11);
-                    std::cout << "不了，还是学习有意思";
+                    std::cout << "NO";
                     --tmp_key;
                 }
                 break;
@@ -511,10 +511,10 @@ int Controller::GameOver()//游戏结束界面
                 if (tmp_key < 2) {
                     SetCursorPosition(20, 18);
                     SetBackColor();
-                    std::cout << "不了，还是学习有意思";
+                    std::cout << "NO";
                     SetCursorPosition(12, 18);
                     SetColor(11);
-                    std::cout << "嗯，好的";
+                    std::cout << "YES";
                     ++tmp_key;
                 }
                 break;
