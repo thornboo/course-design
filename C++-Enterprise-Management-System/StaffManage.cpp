@@ -437,7 +437,7 @@ void StaffManage::readDatas() {
 //在程序退出或添加，修改，删除时，将数据保存到文件中
 void StaffManage::writeDatas() {
     fstream outFile;
-    outFile.open("..\\staffdatas.dat", ios::out | ios::app);
+    outFile.open("..\\staffdatas.dat", ios::out | ios::trunc);
 
     if (!outFile) {
         cout << "打开文件失败!" << endl;
