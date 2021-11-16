@@ -2,7 +2,7 @@ package modle;
 
 /*
 定义工资类
-工资 = 工作时间 * 工时单价 + 奖金
+工资 = 工作时间 * 工时单价 + 奖金（管理人员和员工相同）
 */
 
 public class Salary {
