@@ -33,7 +33,7 @@ public class Main {
         while (flag) {
             System.out.println("|-----欢迎来到员工管理系统-----|");
             System.out.println("您可以进行如下操作:");
-            System.out.print("1.登录\t2.注册\t0.退出");
+            System.out.print("1.登录\t2.注册\t0.退出\n");
             System.out.println("请选择您的操作:");
             manipulation = scan.next();
             switch (manipulation) {
@@ -45,7 +45,7 @@ public class Main {
                         while (flag1) {
                             System.out.println("|-----员工信息管理系统-----|");
                             System.out.println("您可以进行如下操作:");
-                            System.out.print("1.增加员工信息\t2.删除员工信息\t3.查找员工信息\t4.修改员工信息\t5.显示所有员工信息");
+                            System.out.print("1.增加员工信息\t2.删除员工信息\t3.查找员工信息\t4.修改员工信息\t5.显示所有员工信息\n");
                             System.out.println("请选择您的操作:");
                             String manipulation1 = scan.next();
                             switch (manipulation1) {
@@ -105,6 +105,7 @@ public class Main {
                             }
                         }
                     }
+                    break;
                 case "2":
                     managercon.addManager();
                     break;
