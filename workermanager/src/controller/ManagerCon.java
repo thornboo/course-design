@@ -8,7 +8,7 @@ import modle.Manager;
 
 public class ManagerCon implements ManagerImp {
     Scanner scan = new Scanner(System.in);      // 通过 Scanner类来获取用户的输入
-    ArrayList<Manager> managers = new ArrayList<Manager>(); // 创建动态数组
+    ArrayList<Manager> managers; // 创建动态数组
 
     public ManagerCon(ArrayList<Manager> managers) {
         this.managers = managers;
@@ -29,7 +29,7 @@ public class ManagerCon implements ManagerImp {
         manager.setManager_password(password);
         // 增加新的管理员
         managers.add(manager);
-        System.out.println("新建的管理员账号信息为：工号：" + id + "用户名：" + name + "密码：" + password + "\n");
+        System.out.println("新建的管理员账号信息为：工号：" + id + "用户名：" + name + "密码：" + password);
     }
 
     // 管理员登录系统
@@ -46,12 +46,12 @@ public class ManagerCon implements ManagerImp {
         for (Manager value : managers) {    // 循环已有的每一个对象
             if (value.equals(manager)) {    // 比较value和manager两个对象是否相同
                 flag = true;
-                System.out.println("欢迎登陆员工管理系统！\n");
+                System.out.println("欢迎登陆员工管理系统！");
                 break;
             }
         }
         if (!flag) {
-            System.out.println("用户名或密码输入错误！\n");
+            System.out.println("用户名或密码输入错误！");
         }
         return flag;
     }

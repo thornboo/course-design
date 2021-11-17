@@ -4,8 +4,6 @@ package modle;
 定义工作人员的类
 */
 
-import java.util.Date;
-
 public class Worker {
     private int worker_id;                // 工号
     private String worker_name;            // 姓名

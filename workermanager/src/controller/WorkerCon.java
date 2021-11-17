@@ -9,7 +9,7 @@ import modle.Worker;
 public class WorkerCon implements WorkerImp {
 
     //创建一个集合类
-    static ArrayList<Worker> workers = new ArrayList<Worker>();
+    static ArrayList<Worker> workers = new ArrayList<>();
 
     //创建输入
     Scanner scan = new Scanner(System.in);
@@ -21,11 +21,11 @@ public class WorkerCon implements WorkerImp {
     //输出全部员工的信息
     public void printAllWorker() {
         System.out.println("-----输出全部员工信息-----");
-        System.out.println("工号\t姓名\t性别\t职位\t部门\t电话\t邮箱\n");
+        System.out.println("工号\t姓名\t性别\t职位\t部门\t电话\t邮箱");
         for (Worker worker : workers) {
             System.out.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s",
                     worker.getWorker_id(), worker.getWorker_name(), worker.getWorker_sex(), worker.getWorker_duty(),
-                    worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email() + "\n");
+                    worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email());
         }
     }
 
@@ -58,9 +58,9 @@ public class WorkerCon implements WorkerImp {
         worker.setWorker_email(worker_email);
 
         workers.add(worker);
-        System.out.println("填加成功！\n");
+        System.out.println("填加成功！");
         System.out.printf("添加员工信息为：工号:%d, 姓名:%s, 性别:%s, 职位:%s, 部门:%s, 电话:%s, 邮箱:%s",
-                worker_id, worker_name, worker_sex, worker_duty, worker_department, worker_telephone, worker_email + "\n");
+                worker_id, worker_name, worker_sex, worker_duty, worker_department, worker_telephone, worker_email);
     }
 
     @Override
@@ -77,13 +77,13 @@ public class WorkerCon implements WorkerImp {
                 System.out.println("删除成功！");
                 System.out.printf("删除员工信息为:工号:%d, 姓名:%s, 性别:%s, 职务:%s, 部门:%s, 电话:%s, 邮箱:%s",
                         worker.getWorker_id(), worker.getWorker_name(), worker.getWorker_sex(), worker.getWorker_duty(),
-                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email() + "\n");
+                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email());
                 break;
             }
         }
         //如果员工不存在
         if (sum == workers.size() && workers.size() != 0)
-            System.out.println("查无此人,请输入正确信息！\n");
+            System.out.println("查无此人,请输入正确信息！");
     }
 
     public void removeWorkerByName() {
@@ -96,17 +96,17 @@ public class WorkerCon implements WorkerImp {
             if (worker.getWorker_name().equals(worker_name)) {
                 num = 0;
                 workers.remove(worker);
-                System.out.println("删除成功！\n");
+                System.out.println("删除成功！");
                 System.out.printf("删除员工信息为:工号:%d, 姓名:%s, 性别:%s, 职务:%s, 部门:%s, 电话:%s, 邮箱:%s",
                         worker.getWorker_id(), worker.getWorker_name(), worker.getWorker_sex(), worker.getWorker_duty(),
-                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email() + "\n");
+                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email());
                 break;
             }
         }
 
         //如果员工不存在
         if (num == workers.size() && workers.size() != 0)
-            System.out.println("查无此人,请输入正确信息！\n");
+            System.out.println("查无此人,请输入正确信息！");
     }
 
     public void searchWorkerById() {
@@ -120,13 +120,13 @@ public class WorkerCon implements WorkerImp {
                 sum = 0;
                 System.out.printf("删除员工信息为:工号:%d, 姓名:%s, 性别:%s, 职务:%s, 部门:%s, 电话:%s, 邮箱:%s",
                         worker.getWorker_id(), worker.getWorker_name(), worker.getWorker_sex(), worker.getWorker_duty(),
-                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email() + "\n");
+                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email());
                 break;
             }
         }
         //如果员工不存在
         if (sum == workers.size() && workers.size() != 0)
-            System.out.println("查无此人,请输入正确信息！\n");
+            System.out.println("查无此人,请输入正确信息！");
     }
 
 
@@ -140,13 +140,13 @@ public class WorkerCon implements WorkerImp {
             if (worker.getWorker_name().equals(name)) {
                 System.out.printf("查询员工信息为:工号:%d, 姓名:%s, 性别:%s, 职务:%s, 部门:%s, 电话:%s, 邮箱:%s",
                         worker.getWorker_id(), worker.getWorker_name(), worker.getWorker_sex(), worker.getWorker_duty(),
-                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email() + "\n");
+                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email());
                 sum = 0;
             }
         }
         //如果员工不存在
         if (sum == workers.size() && workers.size() != 0)
-            System.out.println("查无此人,请输入正确信息！\n");
+            System.out.println("查无此人,请输入正确信息！");
     }
 
     @Override
@@ -161,7 +161,7 @@ public class WorkerCon implements WorkerImp {
             if (worker.getWorker_id() == id) {
                 System.out.printf("员工当前的信息为→:工号:%d, 姓名:%s, 性别:%s, 职务:%s, 部门:%s, 电话:%s, 邮箱:%s",
                         worker.getWorker_id(), worker.getWorker_name(), worker.getWorker_sex(), worker.getWorker_duty(),
-                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email() + "\n");
+                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email());
                 sum = 0;
                 break;
             }
@@ -169,19 +169,19 @@ public class WorkerCon implements WorkerImp {
 
         //如果员工不存在
         if (sum == workers.size() && workers.size() != 0) {
-            System.out.println("查无此人,请输入正确信息！\n");
+            System.out.println("查无此人,请输入正确信息！");
         } else { // 工号不允许做修改
-            System.out.println("请输入员工姓名：");
+            System.out.println("请输入员工姓名:");
             String worker_name = scan.next();
-            System.out.println("请输入员工性别：");
+            System.out.println("请输入员工性别:");
             String worker_sex = scan.next();
-            System.out.println("请输入员工职位：");
+            System.out.println("请输入员工职位:");
             String worker_duty = scan.next();
-            System.out.println("请输入员工部门：");
+            System.out.println("请输入员工部门:");
             String worker_department = scan.next();
-            System.out.println("请输入员工电话：");
+            System.out.println("请输入员工电话:");
             String worker_telephone = scan.next();
-            System.out.println("请输入员工邮箱：");
+            System.out.println("请输入员工邮箱:");
             String worker_email = scan.next();
 
             for (Worker w : workers) {
@@ -192,10 +192,10 @@ public class WorkerCon implements WorkerImp {
                     w.setWorker_department(worker_department);
                     w.setWorker_telephone(worker_telephone);
                     w.setWorker_email(worker_email);
-                    System.out.println("修改成功！\n");
+                    System.out.println("修改成功！");
                     System.out.printf("修改后的员工信息：工号:%d, 姓名:%s, 性别:%s, 职位:%s, 部门:%s, 电话:%s, 邮箱:%s",
                             w.getWorker_id(), w.getWorker_name(), w.getWorker_sex(), w.getWorker_duty(),
-                            w.getWorker_department(), w.getWorker_telephone(), w.getWorker_email() + "\n");
+                            w.getWorker_department(), w.getWorker_telephone(), w.getWorker_email());
                 }
             }
         }
@@ -214,7 +214,7 @@ public class WorkerCon implements WorkerImp {
             if (worker.getWorker_name().equals(name)) {
                 System.out.printf("员工当前的信息为→:工号:%d, 姓名:%s, 性别:%s, 职务:%s, 部门:%s, 电话:%s, 邮箱:%s",
                         worker.getWorker_id(), worker.getWorker_name(), worker.getWorker_sex(), worker.getWorker_duty(),
-                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email() + "\n");
+                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email());
                 sum = 0;
                 break;
             }
@@ -222,19 +222,19 @@ public class WorkerCon implements WorkerImp {
 
         //如果员工不存在
         if (sum == workers.size() && workers.size() != 0) {
-            System.out.println("查无此人,请输入正确信息！\n");
+            System.out.println("查无此人,请输入正确信息！");
         } else { // 工号不允许做修改
-            System.out.println("请输入员工姓名：");
+            System.out.println("请输入员工姓名:");
             String worker_name = scan.next();
-            System.out.println("请输入员工性别：");
+            System.out.println("请输入员工性别:");
             String worker_sex = scan.next();
-            System.out.println("请输入员工职位：");
+            System.out.println("请输入员工职位:");
             String worker_duty = scan.next();
-            System.out.println("请输入员工部门：");
+            System.out.println("请输入员工部门:");
             String worker_department = scan.next();
-            System.out.println("请输入员工电话：");
+            System.out.println("请输入员工电话:");
             String worker_telephone = scan.next();
-            System.out.println("请输入员工邮箱：");
+            System.out.println("请输入员工邮箱:");
             String worker_email = scan.next();
 
             for (Worker w : workers) {
@@ -245,10 +245,10 @@ public class WorkerCon implements WorkerImp {
                     w.setWorker_department(worker_department);
                     w.setWorker_telephone(worker_telephone);
                     w.setWorker_email(worker_email);
-                    System.out.println("修改成功！\n");
+                    System.out.println("修改成功!");
                     System.out.printf("修改后的员工信息：工号:%d, 姓名:%s, 性别:%s, 职位:%s, 部门:%s, 电话:%s, 邮箱:%s",
                             w.getWorker_id(), w.getWorker_name(), w.getWorker_sex(), w.getWorker_duty(),
-                            w.getWorker_department(), w.getWorker_telephone(), w.getWorker_email() + "\n");
+                            w.getWorker_department(), w.getWorker_telephone(), w.getWorker_email());
                 }
             }
         }
