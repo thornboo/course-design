@@ -31,6 +31,14 @@ public class Worker {
         this.worker_name = worker_name;
     }
 
+    public String getWorker_sex() {
+        return worker_sex;
+    }
+
+    public void setWorker_sex(String worker_sex) {
+        this.worker_sex = worker_sex;
+    }
+
     public String getWorker_duty() {
         return worker_duty;
     }
