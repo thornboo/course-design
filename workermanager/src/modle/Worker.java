@@ -27,7 +27,7 @@ public class Worker {
         return worker_name;
     }
 
-    public void setWroker_name(String worker_name) {
+    public void setWorker_name(String worker_name) {
         this.worker_name = worker_name;
     }
 
