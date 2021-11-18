@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import Implement.ManagerImp;
@@ -44,7 +45,7 @@ public class ManagerCon implements ManagerImp {
         manager.setManager_name(name);
         manager.setManager_password(password);
         for (Manager value : managers) {    // 循环已有的每一个对象
-            if (value.equals(manager)) {    // 比较value和manager两个对象是否相同
+            if (Objects.equals(value.getManager_name(), manager.getManager_name()) && Objects.equals(value.getManager_password(), manager.getManager_password())) {    // 比较value和manager两个对象是否相同
                 flag = true;
                 System.out.println("欢迎登陆员工管理系统！");
                 break;

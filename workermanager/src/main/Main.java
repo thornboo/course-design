@@ -45,7 +45,7 @@ public class Main {
                         while (flag1) {
                             System.out.println("|-----员工信息管理系统-----|");
                             System.out.println("您可以进行如下操作:");
-                            System.out.print("1.增加员工信息\t2.删除员工信息\t3.查找员工信息\t4.修改员工信息\t5.显示所有员工信息\n");
+                            System.out.print("1.增加员工信息\t2.删除员工信息\t3.查找员工信息\t4.修改员工信息\t5.显示所有员工信息\t0.退出系统\n");
                             System.out.println("请选择您的操作:");
                             String manipulation1 = scan.next();
                             switch (manipulation1) {
@@ -99,6 +99,10 @@ public class Main {
                                     break;
                                 case "5":
                                     workercon.printAllWorker();
+                                    break;
+                                case "0":
+                                    flag1 = false;
+                                    System.out.println("退出成功！");
                                     break;
                                 default:
                                     System.out.println("输入操作有误！");

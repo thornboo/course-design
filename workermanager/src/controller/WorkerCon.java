@@ -161,7 +161,7 @@ public class WorkerCon implements WorkerImp {
             if (worker.getWorker_id() == id) {
                 System.out.printf("员工当前的信息为→:工号:%d, 姓名:%s, 性别:%s, 职务:%s, 部门:%s, 电话:%s, 邮箱:%s",
                         worker.getWorker_id(), worker.getWorker_name(), worker.getWorker_sex(), worker.getWorker_duty(),
-                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email());
+                        worker.getWorker_department(), worker.getWorker_telephone(), worker.getWorker_email() + "\n");
                 sum = 0;
                 break;
             }
